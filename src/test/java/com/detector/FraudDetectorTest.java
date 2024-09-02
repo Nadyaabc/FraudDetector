@@ -9,28 +9,37 @@ import static org.junit.Assert.*;
 
 public class FraudDetectorTest {
     FraudDetector fraudDetector = new FraudDetector();
-    {
-        fraudDetector.addFraudNames("Anonymous");
-    }
-    Transaction transactionTrue = new Transaction(new Trader("Anonymous", "Minsk"), 15000000);
-    Transaction transactionFalse = new Transaction(new Trader("Not Anonymous", "Paris"), 150);
 
     @Test
     public void findFraudByTraderNameReturnTrue(){
-        assertTrue(fraudDetector.isFraud(transactionTrue));
+        Transaction transaction = new Transaction(new Trader("Pokemon", "Not Synney"), 1500);
+        assertTrue(fraudDetector.isFraud(transaction));
     }
 
     @Test
     public void findFraudByTraderNameReturnFalse(){
-        assertFalse(fraudDetector.isFraud(transactionFalse));
+        Transaction transaction = new Transaction(new Trader("Not Pokemon", "Not Synney"), 1500);
+        assertFalse(fraudDetector.isFraud(transaction));
     }
 
     @Test
     public void findFraudByMaxSumReturnTrue(){
-        assertTrue(fraudDetector.isFraud(transactionTrue));
+        Transaction transaction = new Transaction(new Trader("Not Pokemon", "Not Synney"), 15000000);
+        assertTrue(fraudDetector.isFraud(transaction));
     }
     @Test
     public void findFraudByMaxSumReturnFalse(){
-        assertFalse(fraudDetector.isFraud(transactionFalse));
+        Transaction transaction = new Transaction(new Trader("Not Pokemon", "Not Synney"), 1500);
+        assertFalse(fraudDetector.isFraud(transaction));
+    }
+    @Test
+    public void findFraudByCityReturnTrue(){
+        Transaction transaction = new Transaction(new Trader("Not Pokemon", "Sydney"), 1500);
+        assertTrue(fraudDetector.isFraud(transaction));
+    }
+    @Test
+    public void findFraudByCityReturnFalse(){
+        Transaction transaction = new Transaction(new Trader("Not Pokemon", "Not Sydney"), 1500);
+        assertFalse(fraudDetector.isFraud(transaction));
     }
 }
