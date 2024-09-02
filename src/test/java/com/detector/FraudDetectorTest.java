@@ -5,7 +5,7 @@ import main.java.com.detector.model.Trader;
 import main.java.com.detector.model.Transaction;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class FraudDetectorTest {
     @Test
@@ -13,13 +13,13 @@ public class FraudDetectorTest {
         FraudDetector fraudDetector = new FraudDetector();
         fraudDetector.addFraudNames("anonymous");
         Transaction transaction = new Transaction(new Trader("anonymous", "moskow"), 1500);
-        assertEquals(true, fraudDetector.isFraud(transaction));
+        assertTrue(fraudDetector.isFraud(transaction));
     }
     @Test
     public void findFraudByTraderNameReturnFalse(){
         FraudDetector fraudDetector = new FraudDetector();
         fraudDetector.addFraudNames("anonymous");
         Transaction transaction = new Transaction(new Trader("notAnonymous", "moskow"), 1500);
-        assertEquals(false, fraudDetector.isFraud(transaction));
+        assertFalse(fraudDetector.isFraud(transaction));
     }
 }
