@@ -15,12 +15,19 @@ public class FraudDetector {
     }
     public boolean isFraud(Transaction transaction){
         String name = transaction.getTrader().getFullName();
-        return fraudNames.contains(name);
+        int sum = transaction.getAmount();
+        if (fraudNames.contains(name)) return true;
+        if (sum>maxSum) {
+            System.out.println("Извините, ставки более " + maxSum + " не являются валидными");
+            return true;
+        }
+        return false;
     }
 
     public void addFraudNames(String name){
         fraudNames.add(name);
         System.out.println("Мошенник под именем " + name + " успешно добавлен");
     }
+
 
 }
