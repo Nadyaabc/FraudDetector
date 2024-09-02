@@ -4,24 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FraudDetector {
-    List<String> fraudNames;
-    private boolean isFraud(Transaction transaction){
+    List<String> fraudNames = new ArrayList<String>();
+    int maxSum;
+    public FraudDetector() {
+        maxSum = 1000000;
+    }
+    public FraudDetector(List<String> fraudNames, int maxSum) {
+        this.fraudNames.addAll(fraudNames);
+        this.maxSum = maxSum;
+    }
+    public boolean isFraud(Transaction transaction){
         String name = transaction.getTrader().getFullName();
-        if (fraudNames.contains(name)) return true;
-        else return false;
+        return fraudNames.contains(name);
     }
 
     public void addFraudNames(String name){
-        if (fraudNames.isEmpty()){
-            fraudNames = new ArrayList<String>();
-            fraudNames.add(name);
-        }
-        else {
-            fraudNames.add(name);
-        }
-        System.out.println("Мошенник под именем " + name + "успешно добавлен");
+        fraudNames.add(name);
+        System.out.println("Мошенник под именем " + name + " успешно добавлен");
     }
 
-    public FraudDetector() {
-    }
 }
