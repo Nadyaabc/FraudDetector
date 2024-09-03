@@ -16,4 +16,7 @@ public class Transaction {
         this.trader = trader;
         this.amount = amount;
     }
+    public String getTransactionInfo(){
+        return trader.getTraderInfo() + "Сумма: " + amount + "\n";
+    }
 }
